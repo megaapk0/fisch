@@ -97,7 +97,6 @@ local TpSpotsFolder = Workspace:FindFirstChild("world"):WaitForChild("spawns"):W
 local NpcFolder = Workspace:FindFirstChild("world"):WaitForChild("npcs")
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 local screenGui = Instance.new("ScreenGui", PlayerGui)
-local shadowCountLabel = Instance.new("TextLabel", screenGui)
 local RenderStepped = RunService.RenderStepped
 local WaitForSomeone = RenderStepped.Wait
 
@@ -461,37 +460,6 @@ NoclipConnection = RunService.Stepped:Connect(function()
     end
 end)
 
--- // // // Dupe // // // --
-local DupeEnabled = false
-local DupeConnection
-local function autoDupe()
-    local hud = LocalPlayer.PlayerGui:FindFirstChild("hud")
-    if hud then
-        local safezone = hud:FindFirstChild("safezone")
-        if safezone then
-            local bodyAnnouncements = safezone:FindFirstChild("bodyannouncements")
-            if bodyAnnouncements then
-                local offerFrame = bodyAnnouncements:FindFirstChild("offer")
-                if offerFrame and offerFrame:FindFirstChild("confirm") then
-                    firesignal(offerFrame.confirm.MouseButton1Click)
-                end
-            end
-        end
-    end
-end
-
-local function startAutoDupe()
-    if DupeConnection or not DupeEnabled then return end
-    DupeConnection = RunService.RenderStepped:Connect(autoDupe)
-end
-
-local function stopAutoDupe()
-    if DupeConnection then
-        DupeConnection:Disconnect()
-        DupeConnection = nil
-    end
-end
-
 PlayerGui.DescendantAdded:Connect(function(descendant)
     if DupeEnabled and descendant.Name == "confirm" and descendant.Parent and descendant.Parent.Name == "offer" then
         local hud = LocalPlayer.PlayerGui:FindFirstChild("hud")
@@ -511,30 +479,6 @@ PlayerGui.DescendantAdded:Connect(function(descendant)
 end)
 
 -- // // // Exclusives // // // --
-local shadowCountLabel = Instance.new("TextLabel", screenGui)
-shadowCountLabel.Size = UDim2.new(0, 200, 0, 50)
-shadowCountLabel.Position = UDim2.new(0, 30, 0, 260)
-shadowCountLabel.BackgroundTransparency = 0.5
-shadowCountLabel.BackgroundColor3 = Color3.fromRGB(38, 38, 38) 
-shadowCountLabel.TextColor3 = Color3.new(220, 125, 255)
-shadowCountLabel.Font = Enum.Font.SourceSans
-shadowCountLabel.TextSize = 24
-shadowCountLabel.Text = "Shadow Count: 0"
-
-local corner = Instance.new("UICorner", shadowCountLabel)
-corner.CornerRadius = UDim.new(0, 10)
-
-local function updateShadowCount()
-    local count = #workspace.Shadows:GetChildren()
-    shadowCountLabel.Text = "Shadow Count: " .. count
-end
-
-spawn(function()
-    while true do
-        updateShadowCount()
-        task.wait(0.5)
-    end
-end)
 
 -- // // // Tabs Gui // // // --
 
