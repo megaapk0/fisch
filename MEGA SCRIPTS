@@ -67,9 +67,9 @@ local Window = Fluent:CreateWindow({
     Title = game:GetService("MarketplaceService"):GetProductInfo(16732694052).Name .." mega hud - Premium",
     SubTitle = " (discord.gg/cT34Cx4TGC)",
     TabWidth = 160,
-    Size = UDim2.fromOffset(580, 460),
+    Size = UDim2.fromOffset(550, 350),
     Acrylic = false, -- The blur may be detectable, setting this to false disables blur entirely
-    Theme = "Rose",
+    Theme = "black",
     MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
 })
 
@@ -488,7 +488,7 @@ local Tabs = { -- https://lucide.dev/icons/
     Items = Window:AddTab({ Title = "Items", Icon = "box" }),
     Teleports = Window:AddTab({ Title = "Teleports", Icon = "map-pin" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "file-text" }),
-    Trade = Window:AddTab({ Title = "Trade", Icon = "gift" })
+    fun = Window:AddTab({ Title = "fun", Icon = "gift" })
 }
 
 local Options = Fluent.Options
