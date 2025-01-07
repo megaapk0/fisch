@@ -540,8 +540,7 @@ end)
 
 local Tabs = { -- https://lucide.dev/icons/
     Home = Window:AddTab({ Title = "Home", Icon = "home" }),
-    Exclusives = Window:AddTab({ Title = "Exclusives", Icon = "heart" }),
-    Main = Window:AddTab({ Title = "Main", Icon = "list" }),
+    fram = Window:AddTab({ Title = "fram", Icon = "list" }),
     Items = Window:AddTab({ Title = "Items", Icon = "box" }),
     Teleports = Window:AddTab({ Title = "Teleports", Icon = "map-pin" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "file-text" }),
@@ -555,79 +554,15 @@ do
         Title = "Copy Discord link",
         Description = "Join our main discord!",
         Callback = function()
-            setclipboard("https://discord.gg/25ms")
+            setclipboard("https://discord.gg/dxxgfzts")
         end
     })
 
     -- // Exclusives Tab // --
-    local sectionExclus = Tabs.Exclusives:AddSection("Exclusives Features")
-    local CountShadows = Tabs.Exclusives:AddToggle("CountShadows", {Title = "Show Count Shadows", Default = false })
-    CountShadows:OnChanged(function()
-        local RequireRod = PlayerGui.hud.safezone.equipment.rods.scroll.safezone:FindFirstChild("Rod Of The Depths")
-        if not RequireRod then return ShowNotification("Requirement Rod Of The Depths") end
-        if Options.CountShadows.Value == true then
-            shadowCountLabel.Visible = true
-        else
-            shadowCountLabel.Visible = false
-        end
-    end)
-    local RodDupe = Tabs.Exclusives:AddToggle("RodDupe", {Title = "Rod Of The Depths Spam", Default = false })
-    RodDupe:OnChanged(function()
-        local RequireRod = PlayerGui.hud.safezone.equipment.rods.scroll.safezone:FindFirstChild("Rod Of The Depths")
-        if not RequireRod then return ShowNotification("Requirement Rod Of The Depths") end
-        while Options.RodDupe.Value do
-            local args1 = {[1] = "Flimsy Rod"}
-            game:GetService("ReplicatedStorage").events.equiprod:FireServer(unpack(args1))
-
-            local args2 = {[1] = "Rod Of The Depths"}
-            game:GetService("ReplicatedStorage").events.equiprod:FireServer(unpack(args2))
-            task.wait(RodDupeDelay)
-        end
-    end)
-    local RodDupe_Delay = Tabs.Exclusives:AddSlider("RodDupe_Delay", {
-        Title = "Rod Of The Depths Spam Delay",
-        Description = "",
-        Default = 0.2,
-        Min = 0,
-        Max = 1,
-        Rounding = 1,
-        Callback = function(Value)
-            RodDupeDelay = Value
-        end
-    })
-    Tabs.Exclusives:AddButton({
-        Title = "Dupe Shadow",
-        Description = "",
-        Callback = function()
-            local RequireRod = PlayerGui.hud.safezone.equipment.rods.scroll.safezone:FindFirstChild("Rod Of The Depths")
-            if not RequireRod then return ShowNotification("Requirement Rod Of The Depths") end
-            for i,v in pairs(LocalPlayer.Backpack:GetChildren()) do 
-                if v:FindFirstChild("offer") then
-                    v.Parent = LocalPlayer.Character
-                end
-            end
-            task.wait(2)
-            for i,v in pairs(LocalPlayer.Character:GetChildren()) do 
-                if v:FindFirstChild("offer") then
-                    v.Parent = LocalPlayer.Backpack
-                end
-            end
-        end
-    })
-
-    Tabs.Exclusives:AddButton({
-        Title = "Destroy Shadows",
-        Description = "",
-        Callback = function()
-            for _,shadow in pairs(workspace.Shadows:GetChildren()) do
-    		    shadow:Destroy()
-		    end
-        end
-    })
 
     -- // Main Tab // --
-    local section = Tabs.Main:AddSection("Auto Fishing")
-    local autoCast = Tabs.Main:AddToggle("autoCast", {Title = "Auto Cast", Default = false })
+    local section = Tabs.fram:AddSection("Auto Fishing")
+    local autoCast = Tabs.fram:AddToggle("autoCast", {Title = "Auto Cast", Default = false })
     autoCast:OnChanged(function()
         local RodName = ReplicatedStorage.playerstats[LocalPlayer.Name].Stats.rod.Value
         if Options.autoCast.Value == true then
@@ -669,7 +604,7 @@ do
             autoCastEnabled = false
         end
     end)
-    local autoShake = Tabs.Main:AddToggle("autoShake", {Title = "Auto Shake", Default = false })
+    local autoShake = Tabs.fram:AddToggle("autoShake", {Title = "Auto Shake", Default = false })
     autoShake:OnChanged(function()
         if Options.autoShake.Value == true then
             autoShakeEnabled = true
@@ -679,7 +614,7 @@ do
             stopAutoShake()
         end
     end)
-    local autoReel = Tabs.Main:AddToggle("autoReel", {Title = "Auto Reel", Default = false })
+    local autoReel = Tabs.fram:AddToggle("autoReel", {Title = "Auto Reel", Default = false })
     autoReel:OnChanged(function()
         if Options.autoReel.Value == true then
             autoReelEnabled = true
@@ -689,7 +624,7 @@ do
             stopAutoReel()
         end
     end)
-    local FreezeCharacter = Tabs.Main:AddToggle("FreezeCharacter", {Title = "Freeze Character", Default = false })
+    local FreezeCharacter = Tabs.fram:AddToggle("FreezeCharacter", {Title = "Freeze Character", Default = false })
     FreezeCharacter:OnChanged(function()
         local oldpos = HumanoidRootPart.CFrame
         FreezeChar = Options.FreezeCharacter.Value
@@ -705,8 +640,8 @@ do
     end)
 
     -- // Mode Tab // --
-    local section = Tabs.Main:AddSection("Mode Fishing")
-    local autoCastMode = Tabs.Main:AddDropdown("autoCastMode", {
+    local section = Tabs.fram:AddSection("Mode Fishing")
+    local autoCastMode = Tabs.fram:AddDropdown("autoCastMode", {
         Title = "Auto Cast Mode",
         Values = {"Legit", "Blatant"},
         Multi = false,
@@ -715,7 +650,7 @@ do
     autoCastMode:OnChanged(function(Value)
         CastMode = Value
     end)
-    local autoShakeMode = Tabs.Main:AddDropdown("autoShakeMode", {
+    local autoShakeMode = Tabs.fram:AddDropdown("autoShakeMode", {
         Title = "Auto Shake Mode",
         Values = {"Navigation", "Mouse"},
         Multi = false,
@@ -724,7 +659,7 @@ do
     autoShakeMode:OnChanged(function(Value)
         ShakeMode = Value
     end)
-    local autoReelMode = Tabs.Main:AddDropdown("autoReelMode", {
+    local autoReelMode = Tabs.fram:AddDropdown("autoReelMode", {
         Title = "Auto Reel Mode",
         Values = {"Legit", "Blatant"},
         Multi = false,
