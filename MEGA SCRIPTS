@@ -980,77 +980,7 @@ do
         end
     })
 
-    local section = Tabs.Fun:AddSection("Player")
-
-    local ToggleWalkspeed = Tabs.Fun:AddToggle("Walk Speed", {Title = "Walk Speed", Default = false })
-    local defaultWalkSpeed = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed
-    
-    local Input = Tabs.Fun:AddInput("Speed", {
-        Title = "Speed",
-        Default = "16",
-        Placeholder = "Enter walk speed",
-        Numeric = true,
-        Finished = false,
-        Callback = function(Value)
-        end
-    })
-    
-    Input.OnChanged = function()
-        if ToggleWalkspeed:Get() then
-            local speedValue = Input.Value
-            if tonumber(speedValue) then
-                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = tonumber(speedValue)
-            end
-        end
-    end
-    
-    ToggleWalkspeed:OnChanged(function(State)
-        if State then
-            local speedValue = Input.Value
-            if speedValue and tonumber(speedValue) then
-                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = tonumber(speedValue)
-            else
-                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
-            end
-        else
-            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = defaultWalkSpeed
-        end
-    end)
-    
-    local ToggleJumpPower = Tabs.Fun:AddToggle("Jump Power", {Title = "Jump Power", Default = false })
-    local defaultJumpPower = game.Players.LocalPlayer.Character.Humanoid.JumpPower
-    
-    local InputJump = Tabs.Fun:AddInput("Power", {
-        Title = "Power",
-        Default = "50",
-        Placeholder = "Enter jump power",
-        Numeric = true,
-        Finished = false,
-        Callback = function(Value)
-        end
-    })
-    
-    InputJump.OnChanged = function()
-        if ToggleJumpPower:Get() then
-            local jumpValue = InputJump.Value
-            if tonumber(jumpValue) then
-                game.Players.LocalPlayer.Character.Humanoid.JumpPower = tonumber(jumpValue)
-            end
-        end
-    end
-    
-    ToggleJumpPower:OnChanged(function(State)
-        if State then
-            local jumpValue = InputJump.Value
-            if jumpValue and tonumber(jumpValue) then
-                game.Players.LocalPlayer.Character.Humanoid.JumpPower = tonumber(jumpValue)
-            else
-                game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
-            end
-        else
-            game.Players.LocalPlayer.Character.Humanoid.JumpPower = defaultJumpPower
-        end
-    end)
+    local section = Tabs.fun:AddSection("Scripts")
 
 Window:SelectTab(1)
 Fluent:Notify({
