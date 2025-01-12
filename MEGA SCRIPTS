@@ -467,8 +467,8 @@ end)
 
 local Tabs = { -- https://lucide.dev/icons/
     Home = Window:AddTab({ Title = "Home", Icon = "home" }),
-    fun = Window:AddTab({ Title = "fun", Icon = "heart" }),
     Main = Window:AddTab({ Title = "Main", Icon = "list" }),
+    fun = Window:AddTab({ Title = "fun", Icon = "heart" }),
     Items = Window:AddTab({ Title = "Items", Icon = "box" }),
     Teleports = Window:AddTab({ Title = "Teleports", Icon = "map-pin" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "file-text" }),
