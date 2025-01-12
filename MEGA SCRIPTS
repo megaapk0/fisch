@@ -1,5 +1,5 @@
-if getgenv().cuppink then warn("CupPibk Hub : Already executed!") return end
-getgenv().cuppink = true
+if getgenv().CLT then warn("CLT Hub : Already executed!") return end
+getgenv().CLT = true
 
 if not game:IsLoaded() then
     game.Loaded:Wait()
@@ -64,7 +64,7 @@ if DeviceType == "Mobile" then
 end
 
 local Window = Fluent:CreateWindow({
-    Title = game:GetService("MarketplaceService"):GetProductInfo(16732694052).Name .." | CupPink - Premium",
+    Title = game:GetService("MarketplaceService"):GetProductInfo(16732694052).Name .." | CLT - Premium",
     SubTitle = " (discord.gg/cT34Cx4TGC)",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
@@ -119,7 +119,7 @@ local RunCount = false
 -- // // // Functions // // // --
 function ShowNotification(String)
     Fluent:Notify({
-        Title = "CupPink Hub",
+        Title = "CLT Hub",
         Content = String,
         Duration = 5
     })
@@ -461,86 +461,13 @@ NoclipConnection = RunService.Stepped:Connect(function()
     end
 end)
 
--- // // // Dupe // // // --
-local DupeEnabled = false
-local DupeConnection
-local function autoDupe()
-    local hud = LocalPlayer.PlayerGui:FindFirstChild("hud")
-    if hud then
-        local safezone = hud:FindFirstChild("safezone")
-        if safezone then
-            local bodyAnnouncements = safezone:FindFirstChild("bodyannouncements")
-            if bodyAnnouncements then
-                local offerFrame = bodyAnnouncements:FindFirstChild("offer")
-                if offerFrame and offerFrame:FindFirstChild("confirm") then
-                    firesignal(offerFrame.confirm.MouseButton1Click)
-                end
-            end
-        end
-    end
-end
 
-local function startAutoDupe()
-    if DupeConnection or not DupeEnabled then return end
-    DupeConnection = RunService.RenderStepped:Connect(autoDupe)
-end
-
-local function stopAutoDupe()
-    if DupeConnection then
-        DupeConnection:Disconnect()
-        DupeConnection = nil
-    end
-end
-
-PlayerGui.DescendantAdded:Connect(function(descendant)
-    if DupeEnabled and descendant.Name == "confirm" and descendant.Parent and descendant.Parent.Name == "offer" then
-        local hud = LocalPlayer.PlayerGui:FindFirstChild("hud")
-        if hud then
-            local safezone = hud:FindFirstChild("safezone")
-            if safezone then
-                local bodyAnnouncements = safezone:FindFirstChild("bodyannouncements")
-                if bodyAnnouncements then
-                    local offerFrame = bodyAnnouncements:FindFirstChild("offer")
-                    if offerFrame and offerFrame:FindFirstChild("confirm") then
-                        firesignal(offerFrame.confirm.MouseButton1Click)
-                    end
-                end
-            end
-        end
-    end
-end)
-
--- // // // Exclusives // // // --
-local shadowCountLabel = Instance.new("TextLabel", screenGui)
-shadowCountLabel.Size = UDim2.new(0, 200, 0, 50)
-shadowCountLabel.Position = UDim2.new(0, 30, 0, 260)
-shadowCountLabel.BackgroundTransparency = 0.5
-shadowCountLabel.BackgroundColor3 = Color3.fromRGB(38, 38, 38) 
-shadowCountLabel.TextColor3 = Color3.new(220, 125, 255)
-shadowCountLabel.Font = Enum.Font.SourceSans
-shadowCountLabel.TextSize = 24
-shadowCountLabel.Text = "Shadow Count: 0"
-
-local corner = Instance.new("UICorner", shadowCountLabel)
-corner.CornerRadius = UDim.new(0, 10)
-
-local function updateShadowCount()
-    local count = #workspace.Shadows:GetChildren()
-    shadowCountLabel.Text = "Shadow Count: " .. count
-end
-
-spawn(function()
-    while true do
-        updateShadowCount()
-        task.wait(0.5)
-    end
-end)
 
 -- // // // Tabs Gui // // // --
 
 local Tabs = { -- https://lucide.dev/icons/
     Home = Window:AddTab({ Title = "Home", Icon = "home" }),
-    Exclusives = Window:AddTab({ Title = "Exclusives", Icon = "heart" }),
+    fun = Window:AddTab({ Title = "fun", Icon = "heart" }),
     Main = Window:AddTab({ Title = "Main", Icon = "list" }),
     Items = Window:AddTab({ Title = "Items", Icon = "box" }),
     Teleports = Window:AddTab({ Title = "Teleports", Icon = "map-pin" }),
@@ -559,72 +486,7 @@ do
         end
     })
 
-    -- // Exclusives Tab // --
-    local sectionExclus = Tabs.Exclusives:AddSection("Exclusives Features")
-    local CountShadows = Tabs.Exclusives:AddToggle("CountShadows", {Title = "Show Count Shadows", Default = false })
-    CountShadows:OnChanged(function()
-        local RequireRod = PlayerGui.hud.safezone.equipment.rods.scroll.safezone:FindFirstChild("Rod Of The Depths")
-        if not RequireRod then return ShowNotification("Requirement Rod Of The Depths") end
-        if Options.CountShadows.Value == true then
-            shadowCountLabel.Visible = true
-        else
-            shadowCountLabel.Visible = false
-        end
-    end)
-    local RodDupe = Tabs.Exclusives:AddToggle("RodDupe", {Title = "Rod Of The Depths Spam", Default = false })
-    RodDupe:OnChanged(function()
-        local RequireRod = PlayerGui.hud.safezone.equipment.rods.scroll.safezone:FindFirstChild("Rod Of The Depths")
-        if not RequireRod then return ShowNotification("Requirement Rod Of The Depths") end
-        while Options.RodDupe.Value do
-            local args1 = {[1] = "Flimsy Rod"}
-            game:GetService("ReplicatedStorage").events.equiprod:FireServer(unpack(args1))
-
-            local args2 = {[1] = "Rod Of The Depths"}
-            game:GetService("ReplicatedStorage").events.equiprod:FireServer(unpack(args2))
-            task.wait(RodDupeDelay)
-        end
-    end)
-    local RodDupe_Delay = Tabs.Exclusives:AddSlider("RodDupe_Delay", {
-        Title = "Rod Of The Depths Spam Delay",
-        Description = "",
-        Default = 0.2,
-        Min = 0,
-        Max = 1,
-        Rounding = 1,
-        Callback = function(Value)
-            RodDupeDelay = Value
-        end
-    })
-    Tabs.Exclusives:AddButton({
-        Title = "Dupe Shadow",
-        Description = "",
-        Callback = function()
-            local RequireRod = PlayerGui.hud.safezone.equipment.rods.scroll.safezone:FindFirstChild("Rod Of The Depths")
-            if not RequireRod then return ShowNotification("Requirement Rod Of The Depths") end
-            for i,v in pairs(LocalPlayer.Backpack:GetChildren()) do 
-                if v:FindFirstChild("offer") then
-                    v.Parent = LocalPlayer.Character
-                end
-            end
-            task.wait(2)
-            for i,v in pairs(LocalPlayer.Character:GetChildren()) do 
-                if v:FindFirstChild("offer") then
-                    v.Parent = LocalPlayer.Backpack
-                end
-            end
-        end
-    })
-
-    Tabs.Exclusives:AddButton({
-        Title = "Destroy Shadows",
-        Description = "",
-        Callback = function()
-            for _,shadow in pairs(workspace.Shadows:GetChildren()) do
-    		    shadow:Destroy()
-		    end
-        end
-    })
-
+    
     -- // Main Tab // --
     local section = Tabs.Main:AddSection("Auto Fishing")
     local autoCast = Tabs.Main:AddToggle("autoCast", {Title = "Auto Cast", Default = false })
@@ -756,7 +618,7 @@ do
     Tabs.Items:AddButton({
         Title = "Teleport to Jack Marrow",
         Callback = function()
-            HumanoidRootPart.CFrame = CFrame.new(-2824.359, 214.311, 1518.130)
+            HumanoidRootPart.CFrame = CFrame.new(260, 135.8, 60.6)
         end
     })
     Tabs.Items:AddButton({
@@ -925,7 +787,7 @@ do
     end)
     local WalkSpeedSliderUI = Tabs.Misc:AddSlider("WalkSpeedSliderUI", {
         Title = "Walk Speed",
-        Min = 16,
+        Min = 53,
         Max = 200,
         Default = 16,
         Rounding = 1,
@@ -1073,7 +935,7 @@ end
 
 Window:SelectTab(1)
 Fluent:Notify({
-    Title = "CupPink",
+    Title = "CLT",
     Content = "Executed!",
     Duration = 8
 })
