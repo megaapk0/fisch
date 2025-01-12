@@ -67,9 +67,9 @@ local Window = Fluent:CreateWindow({
     Title = game:GetService("MarketplaceService"):GetProductInfo(16732694052).Name .." | CLT - Premium",
     SubTitle = " (discord.gg/cT34Cx4TGC)",
     TabWidth = 160,
-    Size = UDim2.fromOffset(580, 460),
+    Size = UDim2.fromOffset(550, 350),
     Acrylic = false, -- The blur may be detectable, setting this to false disables blur entirely
-    Theme = "Rose",
+    Theme = "black",
     MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
 })
 
@@ -735,7 +735,7 @@ do
             HumanoidRootPart.CFrame = CFrame.new(game.Workspace.zones.fishing["The Depths - Serpent"].Position + offset)            -- The Depths - Serpent
             WorldEventTPDropdownUI:SetValue(nil)
         elseif SelectedWorldEvent == "golden tide pool" then
-            local offset = Vector3.new(1487.2, 129, -1163.1)
+            local offset = Vector3.new(0, 129, 0)
             local WorldEvent = game.Workspace.zones.fishing:FindFirstChild("golden tide pool")
             if not WorldEvent then WorldEventTPDropdownUI:SetValue(nil) return ShowNotification("Not found golden tide pool") end
             HumanoidRootPart.CFrame = CFrame.new(game.Workspace.zones.fishing["golden tide pool"].Position + offset)            -- golden tide pool
