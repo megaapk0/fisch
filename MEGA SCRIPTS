@@ -471,7 +471,6 @@ local Tabs = { -- https://lucide.dev/icons/
     player = Window:AddTab({ Title = "player", Icon = "user" }),
     Items = Window:AddTab({ Title = "Items", Icon = "box" }),
     Teleports = Window:AddTab({ Title = "Teleports", Icon = "map-pin" }),
-    Teleports2 = Window:AddTab({ Title = "Teleports2", Icon = "map-pin" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "file-text" }),
     Trade = Window:AddTab({ Title = "Trade", Icon = "gift" })
 }
@@ -619,21 +618,6 @@ do
         
 
     -- // Treasure Tab // --
-    local section = Tabs.Teleports2:AddSection("tp2")
-    Tabs.Teleports2:AddButton({
-        Title = "Teleport Northglider",
-        Callback = function()
-            HumanoidRootPart.CFrame = CFrame.new(20240.9, 756.5, 5756.5)
-        end
-    })
-    Tabs.Teleports2:AddButton({
-        Title = "Teleport Madeira de musgo",
-        Callback = function()
-            HumanoidRootPart.CFrame = CFrame.new(474.7., 150.9, 257.9)
-        end
-    })
-   
-
     local section = Tabs.Items:AddSection("Treasure")
     Tabs.Items:AddButton({
         Title = "Teleport to Jack Marrow",
