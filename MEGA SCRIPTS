@@ -662,20 +662,17 @@ do
     Default = false, -- esse "," e preciso coloque em qualquer situação 
     Callback = function(state)
 	if state then
-	    Fluent:Notify({ Title = "autofarm ligado", Content = "ligado" })
-	else
-	    Fluent:Notify({ Title = "desligando", Content = "desligando" })
+	
         end
     end 
 })
 
 --teleportes
-local TotemTPDropdownUI = Tabs.fun:AddDropdown("TotemTPDropdownUI", {
         Title = "Select Totem",
         Values = {"Aurora", "Sundial", "Windset", "Smokescreen", "Tempest"},
         Multi = false,
         Default = nil,
-    })
+
     TotemTPDropdownUI:OnChanged(function(Value)
         SelectedTotem = Value
         if SelectedTotem == "Aurora" then
