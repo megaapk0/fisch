@@ -614,22 +614,26 @@ do
         end
     })
 
-        -- // Teleports2 Tab // --
-        local section = Tabs.Teleports2:AddSection("tp2")
-        Tabs.Teleports2:AddButton({
-            Title = "Teleport Northglider",
-            Callback = function()
-                HumanoidRootPart.CFrame = CFrame.new(20240.9, 756.5, 5756.5)
-            end
-        })
-        Tabs.Teleports2:AddButton({
-            Title = "Teleport Madeira de musgo",
-            Callback = function()
-                HumanoidRootPart.CFrame = CFrame.new(474.7., 150.9, 257.9)
-            end
-        })
+        -- // Teleports2 // --
+        
+        
 
     -- // Treasure Tab // --
+    local section = Tabs.Teleports2:AddSection("tp2")
+    Tabs.Teleports2:AddButton({
+        Title = "Teleport Northglider",
+        Callback = function()
+            HumanoidRootPart.CFrame = CFrame.new(20240.9, 756.5, 5756.5)
+        end
+    })
+    Tabs.Teleports2:AddButton({
+        Title = "Teleport Madeira de musgo",
+        Callback = function()
+            HumanoidRootPart.CFrame = CFrame.new(474.7., 150.9, 257.9)
+        end
+    })
+   
+
     local section = Tabs.Items:AddSection("Treasure")
     Tabs.Items:AddButton({
         Title = "Teleport to Jack Marrow",
