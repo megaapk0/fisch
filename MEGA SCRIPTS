@@ -893,6 +893,14 @@ do
     DisableOxygen:OnChanged(function()
         LocalPlayer.Character.client.oxygen.Disabled = Options.DisableOxygen.Value
     end)
+    local JustUI = Tabs.Misc:AddToggle("JustUI", {Title = "perfectcast", Default = true })
+    JustUI:OnChanged(function()
+        local BlackShow = JustUI.Value
+    if method == 'FireServer' and self.Name == 'cast' and flags['perfectcast'] then
+    args[1] = 100
+    return old(self, unpack(args))
+end
+end)
     Tabs.Misc:AddButton({
         Title = "Copy XYZ",
         Description = "Copy Clipboard",
