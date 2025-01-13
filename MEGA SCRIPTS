@@ -1,4 +1,4 @@
-if getgenv().CLT then warn("CLT Hub : Already executed!") return end
+ if getgenv().CLT then warn("CLT Hub : Already executed!") return end
 getgenv().CLT = true
 
 if not game:IsLoaded() then
