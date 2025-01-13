@@ -467,7 +467,7 @@ end)
 
 local Tabs = { -- https://lucide.dev/icons/
     Home = Window:AddTab({ Title = "Home", Icon = "home" }),
-    Main = Window:AddTab({ Title = "Main", Icon = "fish" }),
+    Main = Window:AddTab({ Title = "Main", Icon = "fish-symbol" }),
     player = Window:AddTab({ Title = "player", Icon = "user" }),
     Items = Window:AddTab({ Title = "Items", Icon = "box" }),
     Teleports = Window:AddTab({ Title = "Teleports", Icon = "map-pin" }),
@@ -922,20 +922,7 @@ do
     end)
 
     -- // Load Tab // --
-    local section = Tabs.Misc:AddSection("Load Scripts")
-    Tabs.Misc:AddButton({
-        Title = "Load Infinite-Yield FE",
-        Callback = function()
-            loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-        end
-    })
-    Tabs.Misc:AddButton({
-        Title = "Load RemoteSpy",
-        Callback = function()
-            loadstring(game:HttpGetAsync("https://github.com/richie0866/remote-spy/releases/latest/download/RemoteSpy.lua"))()
-        end
-    })
-
+    
     local section = Tabs.Trade:AddSection("Coming Soon...")
 end
 
