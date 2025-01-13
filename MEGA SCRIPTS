@@ -1,4 +1,4 @@
- if getgenv().CLT then warn("CLT Hub : Already executed!") return end
+if getgenv().CLT then warn("CLT Hub : Already executed!") return end
 getgenv().CLT = true
 
 if not game:IsLoaded() then
@@ -467,8 +467,8 @@ end)
 
 local Tabs = { -- https://lucide.dev/icons/
     Home = Window:AddTab({ Title = "Home", Icon = "home" }),
-    Main = Window:AddTab({ Title = "Main", Icon = "list" }),
-    fun = Window:AddTab({ Title = "fun", Icon = "heart" }),
+    Main = Window:AddTab({ Title = "Main", Icon = "fish" }),
+    player = Window:AddTab({ Title = "player", Icon = "user" }),
     Items = Window:AddTab({ Title = "Items", Icon = "box" }),
     Teleports = Window:AddTab({ Title = "Teleports", Icon = "map-pin" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "file-text" }),
@@ -766,8 +766,8 @@ do
     })
 
     -- // Character Tab // --
-    local section = Tabs.Misc:AddSection("Character")
-    local WalkOnWater = Tabs.Misc:AddToggle("WalkOnWater", {Title = "Walk On Water", Default = false })
+    local section = Tabs.player:AddSection("Character")
+    local WalkOnWater = Tabs.player:AddToggle("WalkOnWater", {Title = "Walk On Water", Default = false })
     WalkOnWater:OnChanged(function()
         for i,v in pairs(workspace.zones.fishing:GetChildren()) do
 			if v.Name == WalkZone then
@@ -782,7 +782,7 @@ do
 			end
 		end
     end)
-    local WalkOnWaterZone = Tabs.Misc:AddDropdown("WalkOnWaterZone", {
+    local WalkOnWaterZone = Tabs.player:AddDropdown("WalkOnWaterZone", {
         Title = "Walk On Water Zone",
         Values = {"Ocean", "Desolate Deep", "The Depths"},
         Multi = false,
@@ -791,7 +791,7 @@ do
     WalkOnWaterZone:OnChanged(function(Value)
         WalkZone = Value
     end)
-    local WalkSpeedSliderUI = Tabs.Misc:AddSlider("WalkSpeedSliderUI", {
+    local WalkSpeedSliderUI = Tabs.player:AddSlider("WalkSpeedSliderUI", {
         Title = "Walk Speed",
         Min = 53,
         Max = 200,
@@ -801,7 +801,7 @@ do
     WalkSpeedSliderUI:OnChanged(function(value)
         LocalPlayer.Character.Humanoid.WalkSpeed = value
     end)
-    local JumpHeightSliderUI = Tabs.Misc:AddSlider("JumpHeightSliderUI", {
+    local JumpHeightSliderUI = Tabs.player:AddSlider("JumpHeightSliderUI", {
         Title = "Jump Height",
         Min = 50,
         Max = 200,
@@ -812,7 +812,7 @@ do
         LocalPlayer.Character.Humanoid.JumpPower = value
     end)
 
-    local ToggleNoclip = Tabs.Misc:AddToggle("ToggleNoclip", {Title = "Noclip", Default = false })
+    local ToggleNoclip = Tabs.player:AddToggle("ToggleNoclip", {Title = "Noclip", Default = false })
     ToggleNoclip:OnChanged(function()
         Noclip = Options.ToggleNoclip.Value
     end)
