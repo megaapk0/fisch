@@ -595,10 +595,10 @@ do
         end
     end)
 
-    local section = Tabs.Main:AddSection("Fishing")
+    
 
     -- // Main Tab // --
-    local section = Tabs.Main:AddSection("Auto Fishing")
+    local section = Tabs.Main:AddSection("Fishing")
     local autoCast = Tabs.Main:AddToggle("autoCast", {Title = "Auto Cast", Default = false })
     autoCast:OnChanged(function()
         local RodName = ReplicatedStorage.playerstats[LocalPlayer.Name].Stats.rod.Value
@@ -677,7 +677,7 @@ do
     end)
 
     -- // Mode Tab // --
-    local section = Tabs.Main:AddSection("Mode Fishing")
+  
     local autoCastMode = Tabs.Main:AddDropdown("autoCastMode", {
         Title = "Auto Cast Mode",
         Values = {"Legit", "Blatant"},
