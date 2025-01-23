@@ -876,7 +876,7 @@ do
 
     local DropdownPlace = Tabs.Teleports:AddDropdown("DropdownPlace", {
         Title = "Place teleport",
-        Values = {"altar", "arch", "birch", "brine", "deep", "deepshop", "enchant", "keepers", "mod_house", "moosewood", "mushgrove", "roslit", "snow", "snowcap", "spike", "statue", "sunstone", "swamp", "terrapin", "trident", "vertigo", "volcano", "wilson", "wilsons_rod", "The_Depths", "forsaken"},
+        Values = {"altar", "arch", "birch", "brine", "deep", "deepshop", "enchant", "keepers", "mod_house", "moosewood", "mushgrove", "roslit", "snow", "snowcap", "spike", "statue", "sunstone", "swamp", "terrapin", "trident", "vertigo", "volcano", "wilson", "wilsons_rod", "The_Depths", "forsaken", "Grand reef","atlantean storm"},
         Multi = false,
     })
     DropdownPlace:OnChanged(function(Value)
