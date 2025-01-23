@@ -656,13 +656,7 @@ do
     })
 
     -- // Teleports Tab // --
-    local section = Tabs.Teleports:AddSection("Treasure")
-    Tabs.Teleports:AddButton({
-        Title = "Teleport mosoede",
-        Callback = function()
-            HumanoidRootPart.CFrame = CFrame.new(433.7972106933594, 147.07003784179688, 261.80218505859375)
-        end
-    })
+
     local section = Tabs.Teleports:AddSection("Select Teleport")
     local IslandTPDropdownUI = Tabs.Teleports:AddDropdown("IslandTPDropdownUI", {
         Title = "Area Teleport",
