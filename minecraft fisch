@@ -560,43 +560,7 @@ do
         Content = "[🟩] - Released!\n[✝️] - Lowkey horrible teleports\n[✝️] - Not sure why theres a premium tab\n[⭐] - made by king @droolingforassrnxd"
     })
 
-    local section = Tabs.Premium:AddSection("Fishing⭐")
-    local AutoShakeT3 = Tabs.Main:AddToggle("MyAutoShake3", {Title = "No Shake Delay | Best", Default = false })
-    AutoShakeT3:OnChanged(function(Value)
-        if ProtectPremium == true then
-            autoShake3 = AutoShakeT3.Value
-        else
-            warn("No Premium")
-        end
-    end)
-    local DropdownZoneCast = Tabs.Premium:AddDropdown("DropdownZoneCast", {
-        Title = "Select zone to cast anywhere",
-        Values = {"FischFright24", "Isonade", "Bluefin Tuna Abundance", "", "Deep Ocean", "Desolate Deep", "Harvesters Spike", "Moosewood Docks", "Moosewood Ocean", "Moosewood Ocean Mythical", "Moosewood Pond", "Mushgrove Water", "Ocean", "Roslit Bay", "Roslit Bay Ocean", "Roslit Pond", "Roslit Pond Seaweed", "Scallop Ocean", "Snowcap Ocean", "Snowcap Pond", "Sunstone", "Terrapin Ocean", "The Arch", "Vertigo"},
-        Multi = false,
-    })
-    DropdownZoneCast:OnChanged(function(Value)
-        print("Dropdown changed:", Value)
-        selectedZoneCast = Value
-    end)
-    Tabs.Premium:AddParagraph({
-        Title = "Zone Helper",
-        Content = "First 3 - Event zones\nFischFright24 - Fright Pool"
-    })
-    
-    local ToggleZoneCast1214 = Tabs.Premium:AddToggle("ToggleZoneCast1214", {Title = "Enable cast selected zone", Default = false })
-    ToggleZoneCast1214:OnChanged(function(Value)
-        AutoZoneCast = Value
-        if ProtectPremium == true then
-            if AutoZoneCast then
-                ZoneCasting()
-            end
-        else
-            print("No Premium")
-        end
-    end)
-
-    
-
+  
     -- // Main Tab // --
     local section = Tabs.Main:AddSection("Fishing")
  
