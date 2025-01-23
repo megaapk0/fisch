@@ -1,5 +1,5 @@
-if getgenv().CLT then warn("CLT Hub : Already executed!") return end
-getgenv().CLT = true
+if getgenv().hub then warn("CLT HUB : Already executed!") return end
+getgenv().hub = true
 
 if not game:IsLoaded() then
     game.Loaded:Wait()
@@ -43,7 +43,7 @@ if DeviceType == "Mobile" then
     ImageLabel.BorderSizePixel = 0
     ImageLabel.Position = UDim2.new(0.5, 0, 0.5, 0)
     ImageLabel.Size = UDim2.new(0, 45, 0, 45)
-    ImageLabel.Image = "rbxassetid://"
+    ImageLabel.Image = "rbxassetid://" -- add image here
 
     TextButton.Parent = MainFrame
     TextButton.BackgroundColor3 = Color3.new(1, 1, 1)
@@ -64,12 +64,12 @@ if DeviceType == "Mobile" then
 end
 
 local Window = Fluent:CreateWindow({
-    Title = game:GetService("MarketplaceService"):GetProductInfo(16732694052).Name .." | CLT - Premium",
-    SubTitle = " (discord.gg/cT34Cx4TGC)",
+    Title = game:GetService("MarketplaceService"):GetProductInfo(16732694052).Name .." | Nome do seu HUB - Premium",
+    SubTitle = " (discord.gg/J37PW97j6a)", -- discord link
     TabWidth = 160,
-    Size = UDim2.fromOffset(550, 350),
+    Size = UDim2.fromOffset(580, 460),
     Acrylic = false, -- The blur may be detectable, setting this to false disables blur entirely
-    Theme = "black",
+    Theme = "Dark",
     MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
 })
 
@@ -97,7 +97,6 @@ local TpSpotsFolder = Workspace:FindFirstChild("world"):WaitForChild("spawns"):W
 local NpcFolder = Workspace:FindFirstChild("world"):WaitForChild("npcs")
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 local screenGui = Instance.new("ScreenGui", PlayerGui)
-local shadowCountLabel = Instance.new("TextLabel", screenGui)
 local RenderStepped = RunService.RenderStepped
 local WaitForSomeone = RenderStepped.Wait
 
@@ -119,7 +118,7 @@ local RunCount = false
 -- // // // Functions // // // --
 function ShowNotification(String)
     Fluent:Notify({
-        Title = "CLT Hub",
+        Title = "CLT HUB",
         Content = String,
         Duration = 5
     })
@@ -467,8 +466,7 @@ end)
 
 local Tabs = { -- https://lucide.dev/icons/
     Home = Window:AddTab({ Title = "Home", Icon = "home" }),
-    Main = Window:AddTab({ Title = "Main", Icon = "circle-ellipsis" }),
-    player = Window:AddTab({ Title = "player", Icon = "user" }),
+    Main = Window:AddTab({ Title = "Main", Icon = "list" }),
     Items = Window:AddTab({ Title = "Items", Icon = "box" }),
     Teleports = Window:AddTab({ Title = "Teleports", Icon = "map-pin" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "file-text" }),
@@ -477,16 +475,19 @@ local Tabs = { -- https://lucide.dev/icons/
 
 local Options = Fluent.Options
 
+Window:SelectTab(Home)
+
 do
     Tabs.Home:AddButton({
         Title = "Copy Discord link",
         Description = "Join our main discord!",
         Callback = function()
-            setclipboard("https://discord.gg/25ms")
+            setclipboard("https://discord.gg/J37PW97j6a") -- discord link
         end
     })
 
-    
+
+
     -- // Main Tab // --
     local section = Tabs.Main:AddSection("Auto Fishing")
     local autoCast = Tabs.Main:AddToggle("autoCast", {Title = "Auto Cast", Default = false })
@@ -613,16 +614,12 @@ do
         end
     })
 
-        -- // Teleports2 // --
-        
-        
-
     -- // Treasure Tab // --
     local section = Tabs.Items:AddSection("Treasure")
     Tabs.Items:AddButton({
         Title = "Teleport to Jack Marrow",
         Callback = function()
-            HumanoidRootPart.CFrame = CFrame.new(260, 135.8, 60.6)
+            HumanoidRootPart.CFrame = CFrame.new(-2824.359, 214.311, 1518.130)
         end
     })
     Tabs.Items:AddButton({
@@ -738,12 +735,6 @@ do
             if not WorldEvent then WorldEventTPDropdownUI:SetValue(nil) return ShowNotification("Not found The Depths - Serpent") end
             HumanoidRootPart.CFrame = CFrame.new(game.Workspace.zones.fishing["The Depths - Serpent"].Position + offset)            -- The Depths - Serpent
             WorldEventTPDropdownUI:SetValue(nil)
-        elseif SelectedWorldEvent == "golden tide pool" then
-            local offset = Vector3.new(0, 129, 0)
-            local WorldEvent = game.Workspace.zones.fishing:FindFirstChild("golden tide pool")
-            if not WorldEvent then WorldEventTPDropdownUI:SetValue(nil) return ShowNotification("Not found golden tide pool") end
-            HumanoidRootPart.CFrame = CFrame.new(game.Workspace.zones.fishing["golden tide pool"].Position + offset)            -- golden tide pool
-            WorldEventTPDropdownUI:SetValue(nil)
         end
     end)
     Tabs.Teleports:AddButton({
@@ -770,8 +761,8 @@ do
     })
 
     -- // Character Tab // --
-    local section = Tabs.player:AddSection("Character")
-    local WalkOnWater = Tabs.player:AddToggle("WalkOnWater", {Title = "Walk On Water", Default = false })
+    local section = Tabs.Misc:AddSection("Character")
+    local WalkOnWater = Tabs.Misc:AddToggle("WalkOnWater", {Title = "Walk On Water", Default = false })
     WalkOnWater:OnChanged(function()
         for i,v in pairs(workspace.zones.fishing:GetChildren()) do
 			if v.Name == WalkZone then
@@ -786,7 +777,7 @@ do
 			end
 		end
     end)
-    local WalkOnWaterZone = Tabs.player:AddDropdown("WalkOnWaterZone", {
+    local WalkOnWaterZone = Tabs.Misc:AddDropdown("WalkOnWaterZone", {
         Title = "Walk On Water Zone",
         Values = {"Ocean", "Desolate Deep", "The Depths"},
         Multi = false,
@@ -795,9 +786,9 @@ do
     WalkOnWaterZone:OnChanged(function(Value)
         WalkZone = Value
     end)
-    local WalkSpeedSliderUI = Tabs.player:AddSlider("WalkSpeedSliderUI", {
+    local WalkSpeedSliderUI = Tabs.Misc:AddSlider("WalkSpeedSliderUI", {
         Title = "Walk Speed",
-        Min = 53,
+        Min = 16,
         Max = 200,
         Default = 16,
         Rounding = 1,
@@ -805,7 +796,7 @@ do
     WalkSpeedSliderUI:OnChanged(function(value)
         LocalPlayer.Character.Humanoid.WalkSpeed = value
     end)
-    local JumpHeightSliderUI = Tabs.player:AddSlider("JumpHeightSliderUI", {
+    local JumpHeightSliderUI = Tabs.Misc:AddSlider("JumpHeightSliderUI", {
         Title = "Jump Height",
         Min = 50,
         Max = 200,
@@ -816,7 +807,7 @@ do
         LocalPlayer.Character.Humanoid.JumpPower = value
     end)
 
-    local ToggleNoclip = Tabs.player:AddToggle("ToggleNoclip", {Title = "Noclip", Default = false })
+    local ToggleNoclip = Tabs.Misc:AddToggle("ToggleNoclip", {Title = "Noclip", Default = false })
     ToggleNoclip:OnChanged(function()
         Noclip = Options.ToggleNoclip.Value
     end)
@@ -893,7 +884,6 @@ do
     DisableOxygen:OnChanged(function()
         LocalPlayer.Character.client.oxygen.Disabled = Options.DisableOxygen.Value
     end)
-  
     Tabs.Misc:AddButton({
         Title = "Copy XYZ",
         Description = "Copy Clipboard",
@@ -927,14 +917,26 @@ do
     end)
 
     -- // Load Tab // --
-    
-    local section = Tabs.Trade:AddSection("Coming Soon...")
- 
+    local section = Tabs.Misc:AddSection("Load Scripts")
+    Tabs.Misc:AddButton({
+        Title = "Load Infinite-Yield FE",
+        Callback = function()
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+        end
+    })
+    Tabs.Misc:AddButton({
+        Title = "Load RemoteSpy",
+        Callback = function()
+            loadstring(game:HttpGetAsync("https://github.com/richie0866/remote-spy/releases/latest/download/RemoteSpy.lua"))()
+        end
+    })
 
+    local section = Tabs.Trade:AddSection("Coming Soon...")
+end
 
 Window:SelectTab(1)
 Fluent:Notify({
-    Title = "CLT",
+    Title = "CLT HUB",
     Content = "Executed!",
     Duration = 8
 })
