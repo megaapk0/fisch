@@ -893,14 +893,7 @@ do
     DisableOxygen:OnChanged(function()
         LocalPlayer.Character.client.oxygen.Disabled = Options.DisableOxygen.Value
     end)
-    local JustUI = Tabs.Misc:AddToggle("JustUI", {Title = "perfectcast", Default = true })
-    JustUI:OnChanged(function()
-        local BlackShow = JustUI.Value
-    if method == 'FireServer' and self.Name == 'cast' and flags['perfectcast'] then
-    args[1] = 100
-    return old(self, unpack(args))
-end
-end)
+  
     Tabs.Misc:AddButton({
         Title = "Copy XYZ",
         Description = "Copy Clipboard",
@@ -936,7 +929,45 @@ end)
     -- // Load Tab // --
     
     local section = Tabs.Trade:AddSection("Coming Soon...")
-end
+   ( if flags['infoxygen'] then
+        if not deathcon then
+            deathcon = gethum().Died:Connect(function()
+                task.delay(9, function()
+                    if FindChildOfType(getchar(), 'DivingTank', 'Decal') then
+                        FindChildOfType(getchar(), 'DivingTank', 'Decal'):Destroy()
+                    end
+                    local oxygentank = Instance.new('Decal')
+                    oxygentank.Name = 'DivingTank'
+                    oxygentank.Parent = workspace
+                    oxygentank:SetAttribute('Tier', 1/0)
+                    oxygentank.Parent = getchar()
+                    deathcon = nil
+                end)
+            end)
+        end
+        if deathcon and gethum().Health > 0 then
+            if not getchar():FindFirstChild('DivingTank') then
+                local oxygentank = Instance.new('Decal')
+                oxygentank.Name = 'DivingTank'
+                oxygentank.Parent = workspace
+                oxygentank:SetAttribute('Tier', 1/0)
+                oxygentank.Parent = getchar()
+            end
+        end
+    else
+        if FindChildOfType(getchar(), 'DivingTank', 'Decal') then
+            FindChildOfType(getchar(), 'DivingTank', 'Decal'):Destroy()
+        end
+    end
+    if flags['nopeakssystems'] then
+        getchar():SetAttribute('WinterCloakEquipped', true)
+        getchar():SetAttribute('Refill', true)
+    else
+        getchar():SetAttribute('WinterCloakEquipped', nil)
+        getchar():SetAttribute('Refill', false)
+    end
+end)
+
 
 Window:SelectTab(1)
 Fluent:Notify({
