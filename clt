@@ -64,7 +64,7 @@ if DeviceType == "Mobile" then
 end
 
 local Window = Fluent:CreateWindow({
-    Title = game:GetService("MarketplaceService"):GetProductInfo(16732694052).Name .." | Nome do seu HUB - Premium",
+    Title = game:GetService("MarketplaceService"):GetProductInfo(16732694052).Name .." |CLT HUB - Premium",
     SubTitle = " (discord.gg/J37PW97j6a)", -- discord link
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
@@ -656,6 +656,13 @@ do
     })
 
     -- // Teleports Tab // --
+    local section = Tabs.teleports:AddSection("Treasure")
+    Tabs.teleports:AddButton({
+        Title = "Teleport mosoede",
+        Callback = function()
+            HumanoidRootPart.CFrame = CFrame.new(433.7972106933594, 147.07003784179688, 261.80218505859375)
+        end
+    })
     local section = Tabs.Teleports:AddSection("Select Teleport")
     local IslandTPDropdownUI = Tabs.Teleports:AddDropdown("IslandTPDropdownUI", {
         Title = "Area Teleport",
@@ -936,7 +943,7 @@ end
 
 Window:SelectTab(1)
 Fluent:Notify({
-    Title = "CLT HUB",
+    Title = "clt HUB",
     Content = "Executed!",
     Duration = 8
 })
