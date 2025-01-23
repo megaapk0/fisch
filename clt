@@ -656,8 +656,8 @@ do
     })
 
     -- // Teleports Tab // --
-    local section = Tabs.teleports:AddSection("Treasure")
-    Tabs.teleports:AddButton({
+    local section = Tabs.Teleports:AddSection("Treasure")
+    Tabs.Teleports:AddButton({
         Title = "Teleport mosoede",
         Callback = function()
             HumanoidRootPart.CFrame = CFrame.new(433.7972106933594, 147.07003784179688, 261.80218505859375)
