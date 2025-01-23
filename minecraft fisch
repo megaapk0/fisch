@@ -630,50 +630,7 @@ do
         Appraise()
     end)
 
-    local section = Tabs.Teleports:AddSection("Select Teleport")
-    local IslandTPDropdownUI = Tabs.Teleports:AddDropdown("IslandTPDropdownUI", {
-        Title = "Area Teleport",
-        Values = teleportSpots,
-        Multi = false,
-        Default = nil,
-    })
-    IslandTPDropdownUI:OnChanged(function(Value)
-        if teleportSpots ~= nil and HumanoidRootPart ~= nil then
-            xpcall(function()
-                HumanoidRootPart.CFrame = TpSpotsFolder:FindFirstChild(Value).CFrame + Vector3.new(0, 5, 0)
-                IslandTPDropdownUI:SetValue(nil)
-            end,function (err)
-            end)
-        end
-    end)
-    local TotemTPDropdownUI = Tabs.Teleports:AddDropdown("TotemTPDropdownUI", {
-        Title = "Select Totem",
-        Values = {"Aurora", "Sundial", "Windset", "Smokescreen", "Tempest"},
-        Multi = false,
-        Default = nil,
-    })
-    TotemTPDropdownUI:OnChanged(function(Value)
-        SelectedTotem = Value
-        if SelectedTotem == "Aurora" then
-            HumanoidRootPart.CFrame = CFrame.new(-1811, -137, -3282)
-            TotemTPDropdownUI:SetValue(nil)
-        elseif SelectedTotem == "Sundial" then
-            HumanoidRootPart.CFrame = CFrame.new(-1148, 135, -1075)
-            TotemTPDropdownUI:SetValue(nil)
-        elseif SelectedTotem == "Windset" then
-            HumanoidRootPart.CFrame = CFrame.new(2849, 178, 2702)
-            TotemTPDropdownUI:SetValue(nil)
-        elseif SelectedTotem == "Smokescreen" then
-            HumanoidRootPart.CFrame = CFrame.new(2789, 140, -625)
-            TotemTPDropdownUI:SetValue(nil)
-        elseif SelectedTotem == "Tempest" then
-            HumanoidRootPart.CFrame = CFrame.new(35, 133, 1943)
-            TotemTPDropdownUI:SetValue(nil)
-        end
-    end)
-
-
-
+   
     local section = Tabs.Misc:AddSection("Player")
 
     local ToggleNoclip = Tabs.Misc:AddToggle("ToggleNoclip", {Title = "Noclip", Default = false })
@@ -949,6 +906,50 @@ game:GetService("RunService").Heartbeat:Connect(moveFly)
             game.Players.LocalPlayer.Character.Humanoid.JumpPower = defaultJumpPower
         end
     end)
+
+    local section = Tabs.Teleports:AddSection("Select Teleport")
+    local IslandTPDropdownUI = Tabs.Teleports:AddDropdown("IslandTPDropdownUI", {
+        Title = "Area Teleport",
+        Values = teleportSpots,
+        Multi = false,
+        Default = nil,
+    })
+    IslandTPDropdownUI:OnChanged(function(Value)
+        if teleportSpots ~= nil and HumanoidRootPart ~= nil then
+            xpcall(function()
+                HumanoidRootPart.CFrame = TpSpotsFolder:FindFirstChild(Value).CFrame + Vector3.new(0, 5, 0)
+                IslandTPDropdownUI:SetValue(nil)
+            end,function (err)
+            end)
+        end
+    end)
+    local TotemTPDropdownUI = Tabs.Teleports:AddDropdown("TotemTPDropdownUI", {
+        Title = "Select Totem",
+        Values = {"Aurora", "Sundial", "Windset", "Smokescreen", "Tempest"},
+        Multi = false,
+        Default = nil,
+    })
+    TotemTPDropdownUI:OnChanged(function(Value)
+        SelectedTotem = Value
+        if SelectedTotem == "Aurora" then
+            HumanoidRootPart.CFrame = CFrame.new(-1811, -137, -3282)
+            TotemTPDropdownUI:SetValue(nil)
+        elseif SelectedTotem == "Sundial" then
+            HumanoidRootPart.CFrame = CFrame.new(-1148, 135, -1075)
+            TotemTPDropdownUI:SetValue(nil)
+        elseif SelectedTotem == "Windset" then
+            HumanoidRootPart.CFrame = CFrame.new(2849, 178, 2702)
+            TotemTPDropdownUI:SetValue(nil)
+        elseif SelectedTotem == "Smokescreen" then
+            HumanoidRootPart.CFrame = CFrame.new(2789, 140, -625)
+            TotemTPDropdownUI:SetValue(nil)
+        elseif SelectedTotem == "Tempest" then
+            HumanoidRootPart.CFrame = CFrame.new(35, 133, 1943)
+            TotemTPDropdownUI:SetValue(nil)
+        end
+    end)
+
+
 
     local section = Tabs.Webhook:AddSection("Webhook Stats Messages")
     local InputWebhook = Tabs.Webhook:AddInput("InputWebhook", {
