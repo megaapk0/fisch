@@ -40,13 +40,13 @@ end)
 warn("[Anti Afk] - loaded successfully") 
 
 --<>----<>----<>----< Main Script >----<>----<>----<>--
-print("[KingMethod | Fisch]: loading...")
+print("[ mega hub | Fisch]: loading...")
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Fisch | KingMethod",
+    Title = "Fisch | mega hub",
     SubTitle = "v1.2",
     TabWidth = 150,
     Size = UDim2.fromOffset(600, 400),
@@ -175,6 +175,52 @@ local itemSpots = {
     Fish_Radar = CFrame.new(365.75177, 134.50499, 274.105804, 0.704499543, -0.111681774, -0.70086211, 1.32396817e-05, 0.987542748, -0.157350808, 0.709704578, 0.110844307, 0.695724905),
     Rod_Of_The_Depths = CFrame.new(1704.92, -902.53, 1442.00)
 }
+local WorldEventTPDropdownUI = Tabs.Teleports:AddDropdown("WorldEventTPDropdownUI", {
+  Title = "Select World Event",
+  Values = {"Strange Whirlpool", "Great Hammerhead Shark", "Great White Shark", "Whale Shark", "The Depths - Serpent"},
+  Multi = false,
+  Default = nil,
+})
+WorldEventTPDropdownUI:OnChanged(function(Value)
+  SelectedWorldEvent = Value
+  if SelectedWorldEvent == "Strange Whirlpool" then
+      local offset = Vector3.new(25, 135, 25)
+      local WorldEvent = game.Workspace.zones.fishing:FindFirstChild("Isonade")
+      if not WorldEvent then WorldEventTPDropdownUI:SetValue(nil) return ShowNotification("Not found Strange Whirlpool") end
+      HumanoidRootPart.CFrame = CFrame.new(game.Workspace.zones.fishing.Isonade.Position + offset)                           -- Strange Whirlpool
+      WorldEventTPDropdownUI:SetValue(nil)
+  elseif SelectedWorldEvent == "Great Hammerhead Shark" then
+      local offset = Vector3.new(0, 135, 0)
+      local WorldEvent = game.Workspace.zones.fishing:FindFirstChild("Great Hammerhead Shark")
+      if not WorldEvent then WorldEventTPDropdownUI:SetValue(nil) return ShowNotification("Not found Great Hammerhead Shark") end
+      HumanoidRootPart.CFrame = CFrame.new(game.Workspace.zones.fishing["Great Hammerhead Shark"].Position + offset)         -- Great Hammerhead Shark
+      WorldEventTPDropdownUI:SetValue(nil)
+  elseif SelectedWorldEvent == "Great White Shark" then
+      local offset = Vector3.new(0, 135, 0)
+      local WorldEvent = game.Workspace.zones.fishing:FindFirstChild("Great White Shark")
+      if not WorldEvent then WorldEventTPDropdownUI:SetValue(nil) return ShowNotification("Not found Great White Shark") end
+      HumanoidRootPart.CFrame = CFrame.new(game.Workspace.zones.fishing["Great White Shark"].Position + offset)               -- Great White Shark
+      WorldEventTPDropdownUI:SetValue(nil)
+  elseif SelectedWorldEvent == "Whale Shark" then
+      local offset = Vector3.new(0, 135, 0)
+      local WorldEvent = game.Workspace.zones.fishing:FindFirstChild("Whale Shark")
+      if not WorldEvent then WorldEventTPDropdownUI:SetValue(nil) return ShowNotification("Not found Whale Shark") end
+      HumanoidRootPart.CFrame = CFrame.new(game.Workspace.zones.fishing["Whale Shark"].Position + offset)                     -- Whale Shark
+      WorldEventTPDropdownUI:SetValue(nil)
+  elseif SelectedWorldEvent == "The Depths - Serpent" then
+      local offset = Vector3.new(0, 50, 0)
+      local WorldEvent = game.Workspace.zones.fishing:FindFirstChild("The Depths - Serpent")
+      if not WorldEvent then WorldEventTPDropdownUI:SetValue(nil) return ShowNotification("Not found The Depths - Serpent") end
+      HumanoidRootPart.CFrame = CFrame.new(game.Workspace.zones.fishing["The Depths - Serpent"].Position + offset)            -- The Depths - Serpent
+      WorldEventTPDropdownUI:SetValue(nil)
+  elseif SelectedWorldEvent == "golden tide pool" then
+      local offset = Vector3.new(0, 129, 0)
+      local WorldEvent = game.Workspace.zones.fishing:FindFirstChild("golden tide pool")
+      if not WorldEvent then WorldEventTPDropdownUI:SetValue(nil) return ShowNotification("Not found golden tide pool") end
+      HumanoidRootPart.CFrame = CFrame.new(game.Workspace.zones.fishing["golden tide pool"].Position + offset)            -- golden tide pool
+      WorldEventTPDropdownUI:SetValue(nil)
+  end
+end)
 
 -- Locals
 local LocalPlayer = Players.LocalPlayer
@@ -525,7 +571,7 @@ function WebhookManager()
             local LvlPlayer = game:GetService("Players").LocalPlayer.leaderstats.Level.Value
 
             local Embed = {
-                title = 'KingMethod',
+                title = 'mega hub',
                 color = 0x8B26BB,
                 fields = {
                     { name = 'Player Profile', value = playerProfileUrl },
@@ -543,7 +589,7 @@ function WebhookManager()
                     Method = 'POST',
                     Headers = { ['Content-Type'] = 'application/json' },
                     Body = game:GetService('HttpService'):JSONEncode({
-                        username = 'KingMethod | Fisch',
+                        username = 'mega hub | Fisch',
                         avatar_url = 'https://cdn.discordapp.com/icons/1241045437884923965/6e134ec00e5adf7fc7f82fcabce45e8a.webp?size=4096',
                         embeds = { Embed }
                     }),
@@ -561,7 +607,7 @@ function WebhookManager()
                     Method = 'POST',
                     Headers = { ['Content-Type'] = 'application/json' },
                     Body = game:GetService('HttpService'):JSONEncode({
-                        username = 'KingMethod | Fisch',
+                        username = 'mega hub | Fisch',
                         avatar_url = 'https://cdn.discordapp.com/icons/1241045437884923965/6e134ec00e5adf7fc7f82fcabce45e8a.webp?size=4096',
                         embeds = { Embed }
                     }),
@@ -644,7 +690,7 @@ do
     local section = Tabs.Home:AddSection("Change Log:")
     Tabs.Home:AddParagraph({
         Title = "Information",
-        Content = "[🟩] - Added\n[🟧] - Changed/Buggy\n[🟥] - Removed\n[✝️] - extra\n[⭐] - Credits"
+        Content = "teste fisch"
     })
 
     
@@ -1291,8 +1337,8 @@ InterfaceManager:SetLibrary(Fluent)
 -- SaveManager:IgnoreThemeSettings()
 SaveManager:SetIgnoreIndexes({})
 
-InterfaceManager:SetFolder("KingMethod")
-SaveManager:SetFolder("KingMethod/Fisch")
+InterfaceManager:SetFolder("mega hub")
+SaveManager:SetFolder("mega hub/Fisch")
 
 InterfaceManager:BuildInterfaceSection(Tabs.Settings)
 SaveManager:BuildConfigSection(Tabs.Settings)
@@ -1301,7 +1347,7 @@ SaveManager:BuildConfigSection(Tabs.Settings)
 Window:SelectTab(1)
 
 Fluent:Notify({
-    Title = "KingMethod",
+    Title = "mega hub",
     Content = "The script has been loaded.",
     Duration = 8
 })
